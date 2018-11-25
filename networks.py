@@ -56,6 +56,8 @@ class QNetwork(nn.Module):
 
         self.optimizer = torch.optim.Adam(self.parameters(), 
             lr=self.learning_rate)
+        print("Network")
+        print(self.net)
      
     def getQValues(self, state):
         state = flattenDict(state)

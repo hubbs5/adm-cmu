@@ -104,42 +104,22 @@ def saveModelWeights(agent):
     # Create directories depending on whether or not the agent reached its
     # success criteria, then move checkpoint files into that folder
     file = 'weights.pt'
-    if agent.algo_class == 'dqn':
+    if agent.algo_class == 'dqn' or agent.algo_class == 'dqn_attractor':
         net = deepcopy(agent.dqn)
     if agent.algo_class == 'policy_gradient':
         net = deepcopy(agent.actor)
 
-    if agent.success:
-        _filepath = path.join(agent.env_name, 'success', agent.algo_class, \
-            agent.algo, agent.timestamp)
-        makedirs(_filepath, exist_ok=True)
-        filepath = path.join(_filepath, file)
-        torch.save(net.state_dict(), filepath)
-    else:
-        _filepath = path.join(agent.env_name, 'failure', agent.algo_class, \
-            agent.algo, agent.timestamp)
-        makedirs(_filepath, exist_ok=True)
-        filepath = path.join(_filepath, file)
-        torch.save(net.state_dict(), filepath)
+    _filepath = path.join(agent.env_name, agent.algo_class, \
+        agent.timestamp)
+    makedirs(_filepath, exist_ok=True)
+    filepath = path.join(_filepath, file)
+    torch.save(net.state_dict(), filepath)
     
     # Save second network (if any)
     # TODO: update for A2C and other algorithms
-    if agent.algo == 'dueling':
-            v_net_path = path.join(_filepath, 'value_' + file)
-            torch.save(target.state_dict(), v_net_path)
-    # print("Checkpoint Files")
-    # print(model.temp_files)
-    # # Move temp files to appropriate folder
-    # for file in model.temp_files:
-    #     # if exit_status:
-    #     new_file_path = path.join(model.filepath, path.basename(file))
-    #     os.rename(file, new_file_path)
-    # try:
-    #     # Delete old files
-    #     print("Deleting old files")
-    #     shutil.rmtree(path.dirname(file))
-    # except FileNotFoundError:
-    #     pass
+    # if agent.algo == 'dueling':
+    #     v_net_path = path.join(_filepath, 'value_' + file)
+    #     torch.save(target.state_dict(), v_net_path)
 
     print("\nModel saved to: {:s}".format(filepath))
 
@@ -179,7 +159,7 @@ class replayMemory():
         self.burn_in = burn_in
         assert self.memory_size >= self.burn_in
         self.Buffer = namedtuple('Buffer', 
-            field_names=['state', 'action', 'reward', 'next_state', 'qvals', 'done'])
+            field_names=['state', 'action', 'reward', 'next_state', 'done'])
         self.replayMemory = deque(maxlen=memory_size)
 
     def sample_batch(self, batch_size=32):
@@ -193,10 +173,10 @@ class replayMemory():
         batch = zip(*[self.replayMemory[i] for i in samples])
         return batch
 
-    def append(self, state, action, reward, next_state, qvals, done):
+    def append(self, state, action, reward, next_state, done):
         # Appends results to the memory buffer
         self.replayMemory.append(
-            self.Buffer(state, action, reward, next_state, qvals, done))
+            self.Buffer(state, action, reward, next_state, done))
 
     def burn_in_capacity(self):
         return len(self.replayMemory) / self.burn_in
@@ -215,8 +195,8 @@ def str2bool(argument):
         
 def plot_training_results(agent, filepath):
     window = agent.window
-    vals_to_plot = ['training_step_rewards', 'test_rewards', 
-        'training_loss', 'kl_divergence',
+    vals_to_plot = ['training_rewards', 'test_rewards', 
+        'training_loss', 'kl_divergence', 
         'policy_loss', 'entropy_loss', 'value_loss']
     val_count = 0
     data_dict = {}
@@ -255,7 +235,7 @@ def plot_training_results(agent, filepath):
             ax.set_title(data_dict[d]['title'])
             current_row += 1
             if i == 0:
-                ax.set_xlabel('Steps')
+                ax.set_xlabel('Episodes')
         else:
             ax = fig.add_subplot(grid[current_row, current_col % n_cols])
             ax.plot(data_dict[d]['data'], linewidth=0.2)
