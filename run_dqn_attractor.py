@@ -1,18 +1,16 @@
 #!/usr/bin/env python
 
 import sys
+import os
 import matplotlib as mpl
 if sys.platform == 'linux':
-    mpl.use('TkAgg')
+	if os.environ.get('DISPLAY', '') == '':
+		mpl.use('Agg')
+	else:
+	    mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import numpy as np
 import gym 
-import torch
-from torch import nn
-import seaborn as sns
-import pandas as pd
-import os
-import copy
 import time
 from argparse import ArgumentParser, ArgumentTypeError
 
