@@ -65,7 +65,7 @@ class batchContainer():
 
     def __init__(self):
         self.batch = namedtuple('batch', ['state', 
-            'action', 'reward', 'next_state', 'done'])
+            'action', 'reward', 'next_state', 'mean_qval', 'done'])
         self.buffer = deque()
 
     def unpackBatch(self):
@@ -179,7 +179,7 @@ class replayMemory():
         self.burn_in = burn_in
         assert self.memory_size >= self.burn_in
         self.Buffer = namedtuple('Buffer', 
-            field_names=['state', 'action', 'reward', 'done', 'next_state'])
+            field_names=['state', 'action', 'reward', 'next_state', 'qvals', 'done'])
         self.replayMemory = deque(maxlen=memory_size)
 
     def sample_batch(self, batch_size=32):
@@ -193,10 +193,10 @@ class replayMemory():
         batch = zip(*[self.replayMemory[i] for i in samples])
         return batch
 
-    def append(self, state, action, reward, done, next_state):
+    def append(self, state, action, reward, next_state, qvals, done):
         # Appends results to the memory buffer
         self.replayMemory.append(
-            self.Buffer(state, action, reward, done, next_state))
+            self.Buffer(state, action, reward, next_state, qvals, done))
 
     def burn_in_capacity(self):
         return len(self.replayMemory) / self.burn_in

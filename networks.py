@@ -6,6 +6,7 @@ from collections import namedtuple, deque
 import gym
 from copy import deepcopy
 from utils.network_utils import *
+from utils.algo_utils import *
 
 class QNetwork(nn.Module):
 
@@ -19,7 +20,8 @@ class QNetwork(nn.Module):
         self.dqn_algo = dqn_algo.lower()
         assert self.dqn_algo in algo_list, \
             "dqn_algo {} not recognized, provide one of: {}.".format(dqn_algo, algo_list)
-            
+
+        self.env = env            
         self.n_inputs = self.env.observation_space.shape[0]        
         self.n_outputs = self.env.action_space.n 
         # Allow custom layer definition
