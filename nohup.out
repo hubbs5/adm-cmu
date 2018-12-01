@@ -1,0 +1,96 @@
+usage: run_dqn.py [-h] [--hl HL] [--hn HN] [--lr LR] [--bias BIAS] [--gpu GPU]
+                  [--actFunc ACTFUNC] [--convNet CONVNET] [--env ENV]
+                  [--gamma GAMMA] [--maxEps MAXEPS]
+                  [--netSyncFreq NETSYNCFREQ] [--updateFreq UPDATEFREQ]
+                  [--testFreq TESTFREQ] [--batch BATCH]
+                  [--memorySize MEMORYSIZE] [--burnIn BURNIN] [--print PRINT]
+                  [--mpcSteps MPCSTEPS] [--epsStart EPSSTART]
+                  [--epsEnd EPSEND] [--epsStrategy EPSSTRATEGY]
+                  [--epsConstant EPSCONSTANT] [--window WINDOW]
+                  [--dqnAlgo DQNALGO] [--plot PLOT] [--mpc MPC]
+                  [--randomMPC RANDOMMPC]
+run_dqn.py: error: unrecognized arguments: --maxEpisodes 5000
+Network
+Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): Sigmoid()
+  (2): Linear(in_features=16, out_features=16, bias=True)
+  (3): Sigmoid()
+  (4): Linear(in_features=16, out_features=2, bias=True)
+)
+Network
+QNetwork(
+  (net): Sequential(
+    (0): Linear(in_features=4, out_features=16, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): Sigmoid()
+    (4): Linear(in_features=16, out_features=2, bias=True)
+  )
+)
+Target Network
+QNetwork(
+  (net): Sequential(
+    (0): Linear(in_features=4, out_features=16, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): Sigmoid()
+    (4): Linear(in_features=16, out_features=2, bias=True)
+  )
+)
+Running DQN for CartPole-v0
+Training:
+Episode 1 Mean Rewards: 10.00	Episode 2 Mean Rewards: 10.50	Episode 3 Mean Rewards: 10.33	Episode 4 Mean Rewards: 10.25	Episode 5 Mean Rewards: 11.00	Episode 6 Mean Rewards: 11.00	Episode 7 Mean Rewards: 11.00	Episode 8 Mean Rewards: 11.50	Episode 9 Mean Rewards: 12.78	Episode 10 Mean Rewards: 14.10	Episode 11 Mean Rewards: 13.91	Episode 12 Mean Rewards: 15.25	Episode 13 Mean Rewards: 15.00	Episode 14 Mean Rewards: 14.86	Episode 15 Mean Rewards: 14.80	Episode 16 Mean Rewards: 14.88	Episode 17 Mean Rewards: 14.59	Episode 18 Mean Rewards: 14.28	Episode 19 Mean Rewards: 14.16	Episode 20 Mean Rewards: 13.90	Episode 21 Mean Rewards: 13.76	Episode 22 Mean Rewards: 15.05	Episode 23 Mean Rewards: 14.87	Episode 24 Mean Rewards: 14.79	Episode 25 Mean Rewards: 14.64	Episode 26 Mean Rewards: 14.42	Episode 27 Mean Rewards: 14.56	Episode 28 Mean Rewards: 14.36	Episode 29 Mean Rewards: 14.21	Episode 30 Mean Rewards: 15.00	Episode 31 Mean Rewards: 14.97	Episode 32 Mean Rewards: 14.78	Episode 33 Mean Rewards: 14.64	Episode 34 Mean Rewards: 14.50	Episode 35 Mean Rewards: 14.37	Episode 36 Mean Rewards: 14.22	Episode 37 Mean Rewards: 14.08	Episode 38 Mean Rewards: 14.00	Episode 39 Mean Rewards: 13.87	Episode 40 Mean Rewards: 13.72	Episode 41 Mean Rewards: 13.61	Episode 42 Mean Rewards: 13.57	Episode 43 Mean Rewards: 13.47	Episode 44 Mean Rewards: 13.39	Episode 45 Mean Rewards: 13.29	Episode 46 Mean Rewards: 13.17	Episode 47 Mean Rewards: 13.09	Episode 48 Mean Rewards: 13.02	Episode 49 Mean Rewards: 12.96	Episode 50 Mean Rewards: 12.90	Episode 51 Mean Rewards: 12.84	Episode 52 Mean Rewards: 12.79	Episode 53 Mean Rewards: 12.74	Episode 54 Mean Rewards: 12.67	Episode 55 Mean Rewards: 12.60	Episode 56 Mean Rewards: 12.59	Episode 57 Mean Rewards: 12.54	Episode 58 Mean Rewards: 12.48	Episode 59 Mean Rewards: 12.46	Episode 60 Mean Rewards: 12.40	Episode 61 Mean Rewards: 12.33	Episode 62 Mean Rewards: 12.31	Episode 63 Mean Rewards: 12.33	Episode 64 Mean Rewards: 12.39	Episode 65 Mean Rewards: 12.34	Episode 66 Mean Rewards: 12.30	Episode 67 Mean Rewards: 12.31	Episode 68 Mean Rewards: 12.28	Episode 69 Mean Rewards: 12.25	Episode 70 Mean Rewards: 12.19	Episode 71 Mean Rewards: 12.14	Episode 72 Mean Rewards: 12.08	Episode 73 Mean Rewards: 12.03	Episode 74 Mean Rewards: 12.09	Episode 75 Mean Rewards: 12.05	Episode 76 Mean Rewards: 12.03	Episode 77 Mean Rewards: 12.00	Episode 78 Mean Rewards: 11.96	Episode 79 Mean Rewards: 11.91	Episode 80 Mean Rewards: 11.89	Episode 81 Mean Rewards: 11.86	Episode 82 Mean Rewards: 11.84	Episode 83 Mean Rewards: 11.80	Episode 84 Mean Rewards: 11.77	Episode 85 Mean Rewards: 11.74	Episode 86 Mean Rewards: 11.72	Episode 87 Mean Rewards: 11.69	Episode 88 Mean Rewards: 11.69	Episode 89 Mean Rewards: 11.67	Episode 90 Mean Rewards: 11.64	Episode 91 Mean Rewards: 11.62	Episode 92 Mean Rewards: 11.60	Episode 93 Mean Rewards: 11.58	Episode 94 Mean Rewards: 11.60	Episode 95 Mean Rewards: 11.57	Episode 96 Mean Rewards: 11.54	Episode 97 Mean Rewards: 11.52	Episode 98 Mean Rewards: 11.49	Episode 99 Mean Rewards: 11.46	Episode 100 Mean Rewards: 11.46	Episode 101 Mean Rewards: 11.46	Episode 102 Mean Rewards: 11.45	Episode 103 Mean Rewards: 11.44	Episode 104 Mean Rewards: 11.47	Episode 105 Mean Rewards: 11.42	Episode 106 Mean Rewards: 11.42	Episode 107 Mean Rewards: 11.41	Episode 108 Mean Rewards: 11.36	Episode 109 Mean Rewards: 11.22	Episode 110 Mean Rewards: 11.13	Episode 111 Mean Rewards: 11.40	Episode 112 Mean Rewards: 11.30	Episode 113 Mean Rewards: 11.36	Episode 114 Mean Rewards: 11.35	Episode 115 Mean Rewards: 11.31	Episode 116 Mean Rewards: 11.42	Episode 117 Mean Rewards: 11.43	Episode 118 Mean Rewards: 11.46	Episode 119 Mean Rewards: 11.43	Episode 120 Mean Rewards: 11.43	Episode 121 Mean Rewards: 11.42	Episode 122 Mean Rewards: 11.10	Episode 123 Mean Rewards: 11.08	Episode 124 Mean Rewards: 11.06	Episode 125 Mean Rewards: 11.05	Episode 126 Mean Rewards: 11.06	Episode 127 Mean Rewards: 10.97	Episode 128 Mean Rewards: 11.03	Episode 129 Mean Rewards: 11.02	Episode 130 Mean Rewards: 10.74	Episode 131 Mean Rewards: 10.69	Episode 132 Mean Rewards: 10.68	Episode 133 Mean Rewards: 10.69	Episode 134 Mean Rewards: 10.70	Episode 135 Mean Rewards: 10.69	Episode 136 Mean Rewards: 10.70	Episode 137 Mean Rewards: 10.69	Episode 138 Mean Rewards: 10.74	Episode 139 Mean Rewards: 10.76	Episode 140 Mean Rewards: 10.79	Episode 141 Mean Rewards: 10.80	Episode 142 Mean Rewards: 10.77	Episode 143 Mean Rewards: 10.77	Episode 144 Mean Rewards: 10.79	Episode 145 Mean Rewards: 10.81	Episode 146 Mean Rewards: 10.87	Episode 147 Mean Rewards: 10.89	Episode 148 Mean Rewards: 10.90	Episode 149 Mean Rewards: 10.99	Episode 150 Mean Rewards: 10.98	Episode 151 Mean Rewards: 10.96	Episode 152 Mean Rewards: 10.98	Episode 153 Mean Rewards: 10.97	Episode 154 Mean Rewards: 11.05	Episode 155 Mean Rewards: 11.05	Episode 156 Mean Rewards: 11.01	Episode 157 Mean Rewards: 11.07	Episode 158 Mean Rewards: 11.08	Episode 159 Mean Rewards: 11.08	Episode 160 Mean Rewards: 11.10	Episode 161 Mean Rewards: 11.12	Episode 162 Mean Rewards: 11.12	Episode 163 Mean Rewards: 11.08	Episode 164 Mean Rewards: 11.02	Episode 165 Mean Rewards: 11.02	Episode 166 Mean Rewards: 11.02	Episode 167 Mean Rewards: 10.99	Episode 168 Mean Rewards: 10.98	Episode 169 Mean Rewards: 10.98	Episode 170 Mean Rewards: 10.99	Episode 171 Mean Rewards: 11.00	Episode 172 Mean Rewards: 11.01	Episode 173 Mean Rewards: 11.01	Episode 174 Mean Rewards: 10.98	Episode 175 Mean Rewards: 10.99	Episode 176 Mean Rewards: 11.00	Episode 177 Mean Rewards: 10.98	Episode 178 Mean Rewards: 11.34	Episode 179 Mean Rewards: 11.50	Episode 180 Mean Rewards: 11.58	Episode 181 Mean Rewards: 11.60	Episode 182 Mean Rewards: 11.78	Episode 183 Mean Rewards: 12.02	Episode 184 Mean Rewards: 12.02	Episode 185 Mean Rewards: 12.03	Episode 186 Mean Rewards: 12.23	Episode 187 Mean Rewards: 12.24	Episode 188 Mean Rewards: 12.22	Episode 189 Mean Rewards: 12.20	Episode 190 Mean Rewards: 12.20	Episode 191 Mean Rewards: 12.20	Episode 192 Mean Rewards: 12.19	Episode 193 Mean Rewards: 12.19	Episode 194 Mean Rewards: 12.15	Episode 195 Mean Rewards: 12.26	Episode 196 Mean Rewards: 12.36	Episode 197 Mean Rewards: 12.53	Episode 198 Mean Rewards: 12.58	Episode 199 Mean Rewards: 12.58	Episode 200 Mean Rewards: 12.56	Episode 201 Mean Rewards: 12.54	Episode 202 Mean Rewards: 12.52	Episode 203 Mean Rewards: 12.53	Episode 204 Mean Rewards: 12.65	Episode 205 Mean Rewards: 12.71	Episode 206 Mean Rewards: 12.79	Episode 207 Mean Rewards: 13.29	Episode 208 Mean Rewards: 13.31	Episode 209 Mean Rewards: 13.31	Episode 210 Mean Rewards: 13.24	Episode 211 Mean Rewards: 12.94	Traceback (most recent call last):
+  File "run_dqn.py", line 163, in <module>
+    success = main(sys.argv)
+  File "run_dqn.py", line 153, in main
+    print_episodes=args.print)
+  File "/home/christian/GitHub/adm-cmu/algos/dqn_algo.py", line 138, in train
+    self.update()
+  File "/home/christian/GitHub/adm-cmu/algos/dqn_algo.py", line 210, in update
+    batch = self.replayMemory.sample_batch(batch_size=self.batch_size)
+  File "/home/christian/GitHub/adm-cmu/utils/algo_utils.py", line 170, in sample_batch
+    samples = np.random.choice(len(self.replayMemory), batch_size, replace=False)
+KeyboardInterrupt
+Network
+Sequential(
+  (0): Linear(in_features=4, out_features=16, bias=True)
+  (1): Sigmoid()
+  (2): Linear(in_features=16, out_features=16, bias=True)
+  (3): Sigmoid()
+  (4): Linear(in_features=16, out_features=2, bias=True)
+)
+Network
+QNetwork(
+  (net): Sequential(
+    (0): Linear(in_features=4, out_features=16, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): Sigmoid()
+    (4): Linear(in_features=16, out_features=2, bias=True)
+  )
+)
+Target Network
+QNetwork(
+  (net): Sequential(
+    (0): Linear(in_features=4, out_features=16, bias=True)
+    (1): Sigmoid()
+    (2): Linear(in_features=16, out_features=16, bias=True)
+    (3): Sigmoid()
+    (4): Linear(in_features=16, out_features=2, bias=True)
+  )
+)
+Running DQN for CartPole-v0
+Training:
+Episode 1 Mean Rewards: 11.00	Episode 2 Mean Rewards: 10.50	Episode 3 Mean Rewards: 10.33	Episode 4 Mean Rewards: 10.75	Episode 5 Mean Rewards: 10.60	Episode 6 Mean Rewards: 10.50	Episode 7 Mean Rewards: 10.43	Episode 8 Mean Rewards: 10.38	Episode 9 Mean Rewards: 10.33	Episode 10 Mean Rewards: 10.30	Episode 11 Mean Rewards: 10.27	Episode 12 Mean Rewards: 10.25	Episode 13 Mean Rewards: 10.23	Episode 14 Mean Rewards: 10.07	Episode 15 Mean Rewards: 10.00	Episode 16 Mean Rewards: 9.94	Episode 17 Mean Rewards: 9.88	Episode 18 Mean Rewards: 9.89	Episode 19 Mean Rewards: 9.89	Episode 20 Mean Rewards: 9.90	Episode 21 Mean Rewards: 9.95	Episode 22 Mean Rewards: 9.86	Episode 23 Mean Rewards: 9.91	Episode 24 Mean Rewards: 9.92	Episode 25 Mean Rewards: 9.96	Episode 26 Mean Rewards: 9.88	Episode 27 Mean Rewards: 9.93	Episode 28 Mean Rewards: 9.93	Episode 29 Mean Rewards: 9.93	Episode 30 Mean Rewards: 9.97	Episode 31 Mean Rewards: 9.97	Episode 32 Mean Rewards: 9.94	Episode 33 Mean Rewards: 9.88	Episode 34 Mean Rewards: 10.00	Episode 35 Mean Rewards: 10.00	Episode 36 Mean Rewards: 10.06	Episode 37 Mean Rewards: 10.08	Episode 38 Mean Rewards: 10.11	Episode 39 Mean Rewards: 10.05	Episode 40 Mean Rewards: 10.05	Episode 41 Mean Rewards: 10.05	Episode 42 Mean Rewards: 10.05	Episode 43 Mean Rewards: 10.02	Episode 44 Mean Rewards: 10.00	Episode 45 Mean Rewards: 9.98	Episode 46 Mean Rewards: 9.98	Episode 47 Mean Rewards: 9.94	Episode 48 Mean Rewards: 9.94	Episode 49 Mean Rewards: 9.92	Episode 50 Mean Rewards: 9.92	Episode 51 Mean Rewards: 9.88	Episode 52 Mean Rewards: 9.88	Episode 53 Mean Rewards: 9.89	Episode 54 Mean Rewards: 9.91	Episode 55 Mean Rewards: 9.91	Episode 56 Mean Rewards: 9.91	Episode 57 Mean Rewards: 9.91	Episode 58 Mean Rewards: 9.91	Episode 59 Mean Rewards: 9.92	Episode 60 Mean Rewards: 9.88	Episode 61 Mean Rewards: 9.89	Episode 62 Mean Rewards: 9.90	Episode 63 Mean Rewards: 9.90	Episode 64 Mean Rewards: 9.91	Episode 65 Mean Rewards: 9.91	Episode 66 Mean Rewards: 9.91	Episode 67 Mean Rewards: 9.90	Episode 68 Mean Rewards: 9.91	Episode 69 Mean Rewards: 9.93	Episode 70 Mean Rewards: 9.91	Episode 71 Mean Rewards: 9.90	Episode 72 Mean Rewards: 9.89	Episode 73 Mean Rewards: 9.89	Episode 74 Mean Rewards: 9.91	Episode 75 Mean Rewards: 9.89	Episode 76 Mean Rewards: 9.88	Episode 77 Mean Rewards: 9.87	Episode 78 Mean Rewards: 9.87	Episode 79 Mean Rewards: 9.87	Episode 80 Mean Rewards: 9.88	Episode 81 Mean Rewards: 9.86	Episode 82 Mean Rewards: 9.87	Episode 83 Mean Rewards: 9.87	Episode 84 Mean Rewards: 10.08	Episode 85 Mean Rewards: 10.08	Episode 86 Mean Rewards: 10.08	Episode 87 Mean Rewards: 10.08	Episode 88 Mean Rewards: 10.07	Episode 89 Mean Rewards: 10.07	Episode 90 Mean Rewards: 10.07	Episode 91 Mean Rewards: 10.10	Episode 92 Mean Rewards: 10.12	Episode 93 Mean Rewards: 10.12	Episode 94 Mean Rewards: 10.11	Episode 95 Mean Rewards: 10.11	Episode 96 Mean Rewards: 10.10	Episode 97 Mean Rewards: 10.09	Episode 98 Mean Rewards: 10.09	Episode 99 Mean Rewards: 10.07	Episode 100 Mean Rewards: 10.07	Episode 101 Mean Rewards: 10.06	Episode 102 Mean Rewards: 10.05	Episode 103 Mean Rewards: 10.05	Episode 104 Mean Rewards: 10.02	Episode 105 Mean Rewards: 10.02	Episode 106 Mean Rewards: 10.01	Episode 107 Mean Rewards: 10.00	Episode 108 Mean Rewards: 9.99	Episode 109 Mean Rewards: 9.98	Episode 110 Mean Rewards: 9.99	Episode 111 Mean Rewards: 9.99	Episode 112 Mean Rewards: 9.99	Episode 113 Mean Rewards: 9.98	Episode 114 Mean Rewards: 9.99	Episode 115 Mean Rewards: 10.00	Episode 116 Mean Rewards: 10.01	Episode 117 Mean Rewards: 10.00	Episode 118 Mean Rewards: 10.00	Episode 119 Mean Rewards: 9.99	Episode 120 Mean Rewards: 9.99	Episode 121 Mean Rewards: 9.97	Episode 122 Mean Rewards: 9.97	Episode 123 Mean Rewards: 9.96	Episode 124 Mean Rewards: 9.97	Episode 125 Mean Rewards: 9.95	Episode 126 Mean Rewards: 9.96	Episode 127 Mean Rewards: 9.96	Episode 128 Mean Rewards: 9.95	Episode 129 Mean Rewards: 9.94	Episode 130 Mean Rewards: 9.94	Episode 131 Mean Rewards: 9.92	Episode 132 Mean Rewards: 9.91	Episode 133 Mean Rewards: 9.93	Episode 134 Mean Rewards: 9.89	Episode 135 Mean Rewards: 9.89	Episode 136 Mean Rewards: 9.87	Episode 137 Mean Rewards: 9.84	Episode 138 Mean Rewards: 9.82	Episode 139 Mean Rewards: 9.83	Episode 140 Mean Rewards: 9.83	Episode 141 Mean Rewards: 9.83	Episode 142 Mean Rewards: 9.85	Episode 143 Mean Rewards: 9.84	Episode 144 Mean Rewards: 9.84	Episode 145 Mean Rewards: 9.84	Episode 146 Mean Rewards: 9.99	Episode 147 Mean Rewards: 10.00	Episode 148 Mean Rewards: 9.98	Episode 149 Mean Rewards: 10.21	Episode 150 Mean Rewards: 10.29	Episode 151 Mean Rewards: 10.30	Episode 152 Mean Rewards: 10.30	Episode 153 Mean Rewards: 10.30	Episode 154 Mean Rewards: 10.29	Episode 155 Mean Rewards: 10.30	Episode 156 Mean Rewards: 10.30	Episode 157 Mean Rewards: 10.30	Episode 158 Mean Rewards: 10.29	Episode 159 Mean Rewards: 10.29	Episode 160 Mean Rewards: 10.31	Episode 161 Mean Rewards: 10.32	Episode 162 Mean Rewards: 10.31	Episode 163 Mean Rewards: 10.31	Episode 164 Mean Rewards: 10.29	Episode 165 Mean Rewards: 10.33	Episode 166 Mean Rewards: 10.44	Episode 167 Mean Rewards: 10.62	Episode 168 Mean Rewards: 10.60	Episode 169 Mean Rewards: 10.59	Episode 170 Mean Rewards: 10.61	Episode 171 Mean Rewards: 10.62	Episode 172 Mean Rewards: 10.61	Episode 173 Mean Rewards: 10.60	Episode 174 Mean Rewards: 10.58	Episode 175 Mean Rewards: 10.60	Episode 176 Mean Rewards: 10.60	Episode 177 Mean Rewards: 10.72	Episode 178 Mean Rewards: 10.72	Episode 179 Mean Rewards: 10.72	Episode 180 Mean Rewards: 10.73	Episode 181 Mean Rewards: 10.72	Episode 182 Mean Rewards: 10.70	Episode 183 Mean Rewards: 10.69	Episode 184 Mean Rewards: 10.50	Episode 185 Mean Rewards: 10.50	Episode 186 Mean Rewards: 10.50	Episode 187 Mean Rewards: 10.49	Episode 188 Mean Rewards: 10.49	Episode 189 Mean Rewards: 10.50	Episode 190 Mean Rewards: 10.50	Episode 191 Mean Rewards: 10.46	Episode 192 Mean Rewards: 10.44	Episode 193 Mean Rewards: 10.44	Episode 194 Mean Rewards: 10.44	Episode 195 Mean Rewards: 10.44	Episode 196 Mean Rewards: 10.44	Episode 197 Mean Rewards: 10.48	Episode 198 Mean Rewards: 10.47	Episode 199 Mean Rewards: 10.49	Episode 200 Mean Rewards: 10.47	Episode 201 Mean Rewards: 10.46	Episode 202 Mean Rewards: 10.73	Episode 203 Mean Rewards: 10.72	Episode 204 Mean Rewards: 10.80	Episode 205 Mean Rewards: 10.92	Episode 206 Mean Rewards: 11.37	Episode 207 Mean Rewards: 11.38	Episode 208 Mean Rewards: 11.60	Episode 209 Mean Rewards: 11.63	Episode 210 Mean Rewards: 11.64	Episode 211 Mean Rewards: 11.74	Episode 212 Mean Rewards: 12.13	Traceback (most recent call last):
+  File "run_dqn.py", line 163, in <module>
+    success = main(sys.argv)
+  File "run_dqn.py", line 153, in main
+    print_episodes=args.print)
+  File "/home/christian/GitHub/adm-cmu/algos/dqn_algo.py", line 138, in train
+    self.update()
+  File "/home/christian/GitHub/adm-cmu/algos/dqn_algo.py", line 210, in update
+    batch = self.replayMemory.sample_batch(batch_size=self.batch_size)
+  File "/home/christian/GitHub/adm-cmu/utils/algo_utils.py", line 170, in sample_batch
+    samples = np.random.choice(len(self.replayMemory), batch_size, replace=False)
+KeyboardInterrupt

@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import gym 
 import torch
 from torch import nn
-import seaborn as sns
 import pandas as pd
 import os
 import copy
@@ -37,7 +36,7 @@ class DQNAttractorAgent(object):
         self.timestamp = time.strftime("%Y%m%d_%H%M")
         self.algo_class = 'dqn_attractor'
         
-    def attractorDecision(self, state):
+    def attractorDecision(self, state, mode='train'):
         # Firing rates
         r = torch.zeros((self.time_steps, self.n_actions))
         # Noise vectors for state
@@ -54,21 +53,39 @@ class DQNAttractorAgent(object):
             for n in range(self.n_actions):
                 r[t, n] = r[t-1, n] + self.dt * (qvals[n] + self.I_0 + self.K*r[t-1, n] - self.B * \
                         sum([r[t-1, m] for m in range(self.n_actions) if n!=m]))
-                
+        if mode == 'test':
+            self.test_trajectories.append(torchToNumpy(r, device=self.device))
+
         return r, mean_qval_est
         
-    def getAction(self, state):
-        r, mean_qval_est = self.attractorDecision(state)
+    def getAction(self, state, mode='train'):
+        r, mean_qval_est = self.attractorDecision(state, mode)
         return torch.argmax(r[-1]).item(), mean_qval_est
     
-    def takeStep(self):
-        action, qval = self.getAction(self.s_0)
+    def takeStep(self, mode='train'):
+        action, qval = self.getAction(self.s_0, mode)
         s_1, reward, done, _ = self.env.step(action)
         self.replayMemory.append(self.s_0, action, reward, s_1.copy(), done)
         self.s_0 = s_1.copy()
         self.ep_reward += reward
         
         return done
+
+    def test(self, n_test_episodes=100):
+        self.test_rewards = []
+        self.test_trajectories = []
+        for ep in range(n_test_episodes):
+            self.s_0 = self.env.reset()
+            self.ep_reward = 0
+            done = False
+            while done == False:
+                done = self.takeStep(mode='test')
+                if done:
+                    self.test_rewards.append(self.ep_reward)
+                    # print("\rEpisode {} Mean Rewards {:.2f}\t".format(
+                    #     ep + 1, np.mean(self.test_rewards[-20:])), end="")
+                    break
+        print("Mean test results: {:.2f}".format(np.mean(self.test_rewards)))
             
     def train(self, gamma=1, max_episodes=10000, batch_size=32, 
     	update_freq=1, network_sync_freq=10, print_episodes=False,
