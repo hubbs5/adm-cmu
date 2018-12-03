@@ -41,6 +41,7 @@ class DQNAttractorAgent(object):
         r = torch.zeros((self.time_steps, self.n_actions))
         # Noise vectors for state
         E = self.noise * np.sqrt(self.dt) * np.random.randn(self.time_steps, self.n_inputs)
+        I_max = 100
         # Set initial firing rate to I_0
         r[0] = self.I_0 
         mean_qval_est = torch.zeros(self.n_actions)
@@ -51,27 +52,40 @@ class DQNAttractorAgent(object):
             mean_qval_est += (qvals - mean_qval_est) / (t + 1)
             # Update firing rates
             for n in range(self.n_actions):
-                r[t, n] = r[t-1, n] + self.dt * (qvals[n] + self.I_0 + self.K*r[t-1, n] - self.B * \
+                if self.minmax:
+                    r[t, n] = max(0, min(r[t-1, n] + self.dt * (qvals[n] + self.I_0 + self.K*r[t-1, n] - self.B * \
+                        sum([r[t-1, m] for m in range(self.n_actions) if n!=m])), I_max))
+                else:
+                    r[t, n] = r[t-1, n] + self.dt * (qvals[n] + self.I_0 + self.K*r[t-1, n] - self.B * \
                         sum([r[t-1, m] for m in range(self.n_actions) if n!=m]))
         if mode == 'test':
             self.test_trajectories.append(torchToNumpy(r, device=self.device))
 
         return r, mean_qval_est
         
-    def getAction(self, state, mode='train'):
-        r, mean_qval_est = self.attractorDecision(state, mode)
-        return torch.argmax(r[-1]).item(), mean_qval_est
+    def getAction(self, state, mode='train', attractor=True):
+        if attractor:
+            r, mean_qval_est = self.attractorDecision(state, mode)
+            return torch.argmax(r[-1]).item(), mean_qval_est
+        else:
+            qvals = self.dqn.getQValues(state)
+            return torch.argmax(qvals, dim=-1).item(), qvals
     
-    def takeStep(self, mode='train'):
-        action, qval = self.getAction(self.s_0, mode)
+    def takeStep(self, mode='train', attractor=True, noisy_state=False):
+        if noisy_state and attractor == False:
+            self.s_0 += self.noise * np.random.randn(self.n_inputs)
+        action, qval = self.getAction(self.s_0, mode, attractor=attractor)
         s_1, reward, done, _ = self.env.step(action)
-        self.replayMemory.append(self.s_0, action, reward, s_1.copy(), done)
+        if mode == 'train':
+            self.replayMemory.append(self.s_0, action, reward, s_1.copy(), done)
         self.s_0 = s_1.copy()
         self.ep_reward += reward
         
         return done
 
-    def test(self, n_test_episodes=100):
+    def test(self, n_test_episodes=100, attractor=True, noisy_state=False, minmax=True,
+        print_results=False):
+        self.minmax = minmax
         self.test_rewards = []
         self.test_trajectories = []
         for ep in range(n_test_episodes):
@@ -79,14 +93,15 @@ class DQNAttractorAgent(object):
             self.ep_reward = 0
             done = False
             while done == False:
-                done = self.takeStep(mode='test')
+                done = self.takeStep(mode='test', attractor=attractor, noisy_state=noisy_state)
                 if done:
                     self.test_rewards.append(self.ep_reward)
                     # print("\rEpisode {} Mean Rewards {:.2f}\t".format(
                     #     ep + 1, np.mean(self.test_rewards[-20:])), end="")
                     break
-        print("Mean test results: {:.2f}".format(np.mean(self.test_rewards)))
-            
+        if print_results:
+            print("Mean test results: {:.2f}".format(np.mean(self.test_rewards)))
+
     def train(self, gamma=1, max_episodes=10000, batch_size=32, 
     	update_freq=1, network_sync_freq=10, print_episodes=False,
     	window=20):
